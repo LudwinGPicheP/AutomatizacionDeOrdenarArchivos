@@ -4,17 +4,26 @@
  */
 package com.lunadev.automatizacion_ordenamiento_de_archivos;
 
+import java.io.File;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luna
  */
 public class Ventana extends javax.swing.JFrame {
 
+    private ManejoCarpeta manejo = new ManejoCarpeta();
+    private ListaDeRegistro listaRegistro = new ListaDeRegistro();
+    private DefaultTableModel modeloTabla;
+    private Automatizacion_Ordenamiento_De_Archivos Ordenar = new Automatizacion_Ordenamiento_De_Archivos();
+
     /**
      * Creates new form Ventana
      */
     public Ventana() {
         initComponents();
+        modeloTabla = (DefaultTableModel) tabla_registros.getModel();
     }
 
     /**
@@ -26,66 +35,206 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabla_registros = new javax.swing.JTable();
+        btn_empezar = new javax.swing.JButton();
+        btn_seleccionarCarpeta = new javax.swing.JButton();
+        btn_agregar = new javax.swing.JButton();
+        txt_clave = new javax.swing.JTextField();
+        txt_Destino = new javax.swing.JTextField();
+        btn_eliminar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        spinner_index = new javax.swing.JSpinner();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Automatizacion de Ordenación de Archivos");
 
-        jScrollPane1.setViewportView(jTree1);
+        tabla_registros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel1.setText("Selecciona la Carpeta");
+            },
+            new String [] {
+                "Indice", "Clave o Extension", "Carpeta", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tabla_registros);
 
-        jButton1.setText("+");
+        btn_empezar.setText("Empezar");
+        btn_empezar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_empezarActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Nueva extencion o clave");
+        btn_seleccionarCarpeta.setText("Escoger Carpeta");
+        btn_seleccionarCarpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_seleccionarCarpetaActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("Nueva extencion o clave");
+        btn_agregar.setText("+");
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("Carpeta Destino");
+        txt_clave.setText("Agregar clave");
+
+        txt_Destino.setText("Carpeta Destino");
+
+        btn_eliminar.setText("-");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(btn_empezar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_seleccionarCarpeta)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(txt_Destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_agregar)
+                        .addGap(88, 88, 88)
+                        .addComponent(spinner_index, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_eliminar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_seleccionarCarpeta)
+                    .addComponent(btn_agregar)
+                    .addComponent(txt_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_eliminar)
+                    .addComponent(spinner_index, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_empezar)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(jPanel1);
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(165, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(146, 146, 146))
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Acción realizada al hacer clic en el botón para seleccionar una carpeta.
+     * Se llama al método 'seleccionarCarpeta' de la instancia 'manejo'. Se
+     * comenta la llamada a 'agregarRegistro' y 'actualizarTabla' para futuras
+     * implementaciones.
+     *
+     * @param evt Evento que desencadena la acción.
+     */
+    private void btn_seleccionarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarCarpetaActionPerformed
+        manejo.seleccionarCarpeta();
+        //listaRegistro.agregarRegistro("todo", "random", manejo.getCarpetaSeleccionada()+ File.separator +"Random");
+        //actualizarTabla();
+    }//GEN-LAST:event_btn_seleccionarCarpetaActionPerformed
+    /**
+     * Acción realizada al hacer clic en el botón para agregar un registro.
+     * Obtiene la clave y destino desde campos de texto, agrega el registro a
+     * 'listaRegistro', actualiza la tabla y limpia los campos de texto.
+     *
+     * @param evt Evento que desencadena la acción.
+     */
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        String clave = txt_clave.getText();
+        String destino = txt_Destino.getText();
+
+        listaRegistro.agregarRegistro(clave, destino, manejo.getCarpetaSeleccionada() + File.separator + destino);
+        actualizarTabla();
+
+        txt_clave.setText("");
+        txt_Destino.setText("");
+    }//GEN-LAST:event_btn_agregarActionPerformed
+
+    /**
+     * Acción realizada al hacer clic en el botón para eliminar un registro.
+     * Obtiene el índice desde un spinner, borra el registro de 'listaRegistro',
+     * actualiza la tabla y limpia los campos de texto.
+     *
+     * @param evt Evento que desencadena la acción.
+     */
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        int index = (int) spinner_index.getValue();
+        listaRegistro.borrarRegistroIndex(index);
+        actualizarTabla();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+    /**
+     * Acción realizada al hacer clic en el botón para empezar la ordenación de
+     * archivos. Recorre la lista de registros, llamando al método
+     * 'ordenarArchivos' de la clase 'Ordenar' para cada registro en
+     * 'listaRegistro'.
+     *
+     * @param evt Evento que desencadena la acción.
+     */
+    private void btn_empezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_empezarActionPerformed
+        for (int i = 0; i < listaRegistro.tamañoLista(); i++) {
+            Ordenar.ordenarArchivos(manejo.getCarpetaSeleccionada(), listaRegistro.obtenerClaveIndex(i), listaRegistro.obtenerRutaIndex(i));
+        }
+    }//GEN-LAST:event_btn_empezarActionPerformed
+    /**
+     * Actualiza la tabla en la interfaz gráfica con los datos de
+     * 'listaRegistro'.
+     *
+     */
+    private void actualizarTabla() {
+        modeloTabla.setRowCount(0);
+
+        for (int i = 0; i < listaRegistro.tamañoLista(); i++) {
+            Object[] rowData = {i, listaRegistro.obtenerClaveIndex(i), listaRegistro.obtenerDestinoIndex(i), listaRegistro.obtenerRutaIndex(i)};
+            modeloTabla.addRow(rowData);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -123,12 +272,20 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JButton btn_agregar;
+    private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_empezar;
+    private javax.swing.JButton btn_seleccionarCarpeta;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner spinner_index;
+    private javax.swing.JTable tabla_registros;
+    private javax.swing.JTextField txt_Destino;
+    private javax.swing.JTextField txt_clave;
     // End of variables declaration//GEN-END:variables
 }
